@@ -21,6 +21,21 @@ npm i
 npm run dev
 ```
 
+## GitHub Pages
+
+The GitHub Actions workflow builds and publishes the static site when `main` is
+updated, or when it is run manually. In the repository's **Settings → Pages**,
+set the build and deployment source to **GitHub Actions**. The resulting URL is
+`https://vishalharne.github.io/Om-Raje-New-UI/`.
+
+The repository is private; GitHub Pages availability for private repositories
+depends on the account's GitHub plan. Publishing a Pages site can make the site
+public even when its source repository is private.
+
+The Pages build uses `/Om-Raje-New-UI/` as its base path; local development
+continues to use `/`. If the repository is renamed, update the base path in
+`vite.config.ts` and the build checks in `.github/workflows/deploy.yml`.
+
 ## Built with
 
 - TanStack Start

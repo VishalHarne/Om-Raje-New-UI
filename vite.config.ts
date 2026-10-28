@@ -6,10 +6,18 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+const pagesBasePath = process.env.GITHUB_ACTIONS === "true" ? "/Om-Raje-New-UI" : "";
+
 export default defineConfig({
+  vite: {
+    base: pagesBasePath ? `${pagesBasePath}/` : "/",
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    router: { basepath: pagesBasePath || "/" },
+    pages: [{ path: "/" }],
+    prerender: { enabled: true, failOnError: true },
   },
 });

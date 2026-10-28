@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { assetUrl } from "@/lib/asset-url";
 import { Reveal, SectionTag } from "./reveal";
 import { useL } from "./i18n";
 
@@ -61,7 +62,7 @@ function StoryCard({ p, n }: { p: (typeof posts)[number]; n: number }) {
         {p.imgs.map((src, k) => (
           <img
             key={src}
-            src={src}
+            src={assetUrl(src)}
             alt={k === 0 ? l(p.title) : ""}
             className="absolute inset-0 h-full w-full object-cover transition-all duration-1000"
             style={{ opacity: k === img ? 1 : 0, transform: k === img ? "scale(1)" : "scale(1.08)" }}
@@ -79,7 +80,7 @@ function StoryCard({ p, n }: { p: (typeof posts)[number]; n: number }) {
               aria-label={`Photo ${k + 1}`}
               className={`h-12 w-12 overflow-hidden rounded-xl border-2 transition sm:h-14 sm:w-14 ${k === img ? "scale-110 border-primary" : "border-transparent opacity-60 hover:opacity-100"}`}
             >
-              <img src={src} alt="" className="h-full w-full object-cover" />
+              <img src={assetUrl(src)} alt="" className="h-full w-full object-cover" />
             </button>
           ))}
         </div>

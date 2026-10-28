@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { assetUrl } from "@/lib/asset-url";
 import { LangSwitch, useL } from "./i18n";
 
 const slides = [
@@ -21,6 +23,7 @@ export function Hero() {
   const l = useL();
   const [i, setI] = useState(0);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % slides.length), 6000);
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -40,7 +43,7 @@ export function Hero() {
           style={{ opacity: idx === i ? 1 : 0 }}
         >
           <img
-            src={src}
+            src={assetUrl(src)}
             alt={idx === 0 ? "Om Raje meeting residents in Dharashiv" : ""}
             className={`h-full w-full object-cover ${idx === i ? "animate-kenburns" : ""}`}
           />
@@ -49,7 +52,12 @@ export function Hero() {
       <div className="absolute inset-0 bg-veil" />
       <div className="absolute inset-0 bg-dusk mix-blend-screen opacity-70" />
 
-      <nav className={`fixed inset-x-0 top-0 z-50 px-3 text-foreground transition-all duration-500 ${scrolled ? "py-3" : "on-photo py-4 md:py-6"}`}>
+      <nav
+        className={`fixed inset-x-0 top-0 z-50 px-3 text-foreground transition-all duration-500 ${scrolled ? "py-3" : "on-photo py-4 md:py-6"}`}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") setMenuOpen(false);
+        }}
+      >
         <div
           className={`mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-full py-2.5 pl-3 pr-2.5 transition-all duration-500 md:flex md:justify-between md:px-5 ${scrolled ? "glass" : ""}`}
         >
@@ -75,7 +83,33 @@ export function Hero() {
             >
               {l("आवाज द्या", "Raise your voice")}
             </a>
+            <button
+              type="button"
+              aria-label={menuOpen ? l("मेनू बंद करा", "Close menu") : l("मेनू उघडा", "Open menu")}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
+              onClick={() => setMenuOpen((open) => !open)}
+              className="glass grid h-11 w-11 place-items-center rounded-full md:hidden"
+            >
+              {menuOpen ? <X aria-hidden="true" size={20} /> : <Menu aria-hidden="true" size={20} />}
+            </button>
           </div>
+        </div>
+        <div
+          id="mobile-navigation"
+          hidden={!menuOpen}
+          className="mx-auto mt-2 max-w-7xl rounded-3xl border border-border bg-popover p-3 text-popover-foreground shadow-card md:hidden"
+        >
+          {nav.map(([label, href]) => (
+            <a
+              key={href}
+              href={href}
+              onClick={() => setMenuOpen(false)}
+              className="block rounded-xl px-4 py-3 text-base hover:bg-secondary focus-visible:bg-secondary"
+            >
+              {l(label)}
+            </a>
+          ))}
         </div>
       </nav>
 
@@ -113,15 +147,17 @@ export function Hero() {
                   key={idx}
                   aria-label={`Slide ${idx + 1}`}
                   onClick={() => setI(idx)}
-                  className="relative h-1 w-8 overflow-hidden rounded-full bg-foreground/20 sm:w-10"
+                  className="flex h-11 w-8 items-center sm:w-10"
                 >
-                  <span
-                    className="absolute inset-y-0 left-0 bg-primary"
-                    style={{
-                      width: idx <= i ? "100%" : "0%",
-                      transition: idx === i ? "width 6s linear" : "none",
-                    }}
-                  />
+                  <span className="relative h-1 w-full overflow-hidden rounded-full bg-foreground/20">
+                    <span
+                      className="absolute inset-y-0 left-0 bg-primary"
+                      style={{
+                        width: idx <= i ? "100%" : "0%",
+                        transition: idx === i ? "width 6s linear" : "none",
+                      }}
+                    />
+                  </span>
                 </button>
               ))}
             </div>

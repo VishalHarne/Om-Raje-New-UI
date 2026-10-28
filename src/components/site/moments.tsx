@@ -1,5 +1,6 @@
 import { Reveal } from "./reveal";
 import { useL } from "./i18n";
+import { assetUrl } from "@/lib/asset-url";
 
 const trio = [
   { src: "/images/community-visit.webp", t: ["जिथे प्रश्न, तिथे संवाद.", "Wherever there's a problem, there's a dialogue."] },
@@ -36,7 +37,7 @@ export function Moments() {
               key={m.src}
               className="group relative flex-1 overflow-hidden rounded-[1.75rem] transition-all duration-700 ease-out hover:flex-[2.6]"
             >
-              <img src={m.src} alt={l(m.t)} className="absolute inset-0 h-full w-full object-cover transition duration-[1.5s] group-hover:scale-110" />
+              <img src={assetUrl(m.src)} alt={l(m.t)} className="absolute inset-0 h-full w-full object-cover transition duration-[1.5s] group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
               <div className="on-photo absolute bottom-0 p-6 md:p-7">
                 <p className="label-mono text-gold">0{k + 1} / DHARASHIV</p>
@@ -64,7 +65,7 @@ export function Moments() {
               delay={k * 90}
               className={`group relative overflow-hidden rounded-3xl ${k === 0 || k === 6 ? "col-span-2" : ""} ${f.cls}`}
             >
-              <img src={f.src} alt={l(f.t)} className="h-full w-full object-cover grayscale-[40%] transition duration-1000 group-hover:scale-105 group-hover:grayscale-0" />
+              <img src={assetUrl(f.src)} alt={l(f.t)} className="h-full w-full object-cover grayscale-[40%] transition duration-1000 group-hover:scale-105 group-hover:grayscale-0" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/80 to-transparent opacity-60 transition duration-500 group-hover:opacity-100 md:opacity-0" />
               <span className="on-photo absolute bottom-3 left-3 right-3 text-sm transition duration-500 md:translate-y-3 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100">
                 {l(f.t)}

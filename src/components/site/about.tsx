@@ -1,5 +1,6 @@
 import { Reveal, SectionTag } from "./reveal";
 import { useL } from "./i18n";
+import { assetUrl } from "@/lib/asset-url";
 
 const timeline = [
   { y: ["२००९", "2009"], t: ["महाराष्ट्र विधानसभेवर निवड.", "Elected to the Maharashtra Legislative Assembly."] },
@@ -28,7 +29,7 @@ export function About() {
               <div className="absolute -inset-4 rounded-[2.5rem] bg-fire opacity-60 blur-2xl" />
               <div className="relative overflow-hidden rounded-[2rem] border border-border shadow-card">
                 <img
-                  src="/images/portrait.webp"
+                  src={assetUrl("/images/portrait.webp")}
                   alt="Portrait of Om Raje Nimbalkar"
                   className="aspect-[4/5] w-full object-cover transition duration-[1.5s] hover:scale-105"
                 />
