@@ -6,7 +6,7 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-const pagesBasePath = process.env.GITHUB_ACTIONS === "true" ? "/Om-Raje-New-UI" : "";
+const pagesBasePath = process.env["GITHUB_ACTIONS"] === "true" ? "/Om-Raje-New-UI" : "";
 
 export default defineConfig({
   vite: {
