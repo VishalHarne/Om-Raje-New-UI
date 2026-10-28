@@ -58,7 +58,7 @@ export function ThemeSwitch() {
     <div className="fixed bottom-4 left-4 z-[70] flex items-center gap-2">
       <button
         onClick={() => setOpen((o) => !o)}
-        aria-label="थीम बदला"
+        aria-label={l("थीम बदला", "Change theme")}
         aria-expanded={open}
         className="glass group grid h-12 w-12 place-items-center rounded-full shadow-card transition hover:scale-110"
       >
@@ -75,12 +75,12 @@ export function ThemeSwitch() {
             key={t.id}
             onClick={(e) => choose(t.id, e)}
             aria-pressed={active === t.id}
-            aria-label={t.en}
-            className={`flex items-center gap-2 rounded-full p-1.5 text-sm sm:pr-3 transition ${active === t.id ? "bg-primary text-primary-foreground" : "hover:bg-secondary"}`}
+            aria-label={l(t.label, t.en)}
+            className={`flex h-11 min-w-11 items-center justify-center gap-2 rounded-full p-1.5 text-sm sm:pr-3 transition ${active === t.id ? "bg-primary text-primary-foreground" : "hover:bg-secondary"}`}
           >
             <span className="flex -space-x-1.5">
               {t.sw.map((c) => (
-                <span key={c} className="h-5 w-5 rounded-full border border-border" style={{ background: c }} />
+                <span key={c} className="h-4 w-4 rounded-full border border-border sm:h-5 sm:w-5" style={{ background: c }} />
               ))}
             </span>
             <span className="hidden sm:inline">{l(t.label, t.en)}</span>

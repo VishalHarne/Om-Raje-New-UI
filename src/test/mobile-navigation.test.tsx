@@ -21,12 +21,18 @@ describe("Mobile navigation", () => {
 
     const menu = document.getElementById("mobile-navigation");
     expect(menu).toBeVisible();
-    expect(screen.getByRole("button", { name: "Close menu" })).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("button", { name: "Close menu" })).toHaveAttribute(
+      "aria-expanded",
+      "true",
+    );
     expect(within(menu!).getAllByRole("link")).toHaveLength(5);
 
     fireEvent.click(within(menu!).getByRole("link", { name: "Work" }));
     expect(menu).not.toBeVisible();
-    expect(screen.getByRole("button", { name: "Open menu" })).toHaveAttribute("aria-expanded", "false");
+    expect(screen.getByRole("button", { name: "Open menu" })).toHaveAttribute(
+      "aria-expanded",
+      "false",
+    );
   });
 
   it("closes when Escape is pressed", () => {

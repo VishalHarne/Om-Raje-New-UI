@@ -55,7 +55,7 @@ export function LangSwitch() {
           key={k}
           onClick={() => setLang(k)}
           aria-pressed={lang === k}
-          className={`relative z-10 w-10 rounded-full py-1.5 transition ${lang === k ? "text-primary-foreground" : "text-foreground/70"}`}
+          className={`relative z-10 h-11 w-11 rounded-full transition ${lang === k ? "text-primary-foreground" : "text-foreground/70"}`}
         >
           {k === "mr" ? "मरा" : "EN"}
         </button>
